@@ -10,6 +10,9 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
+    const REGISTRO_EXITOSO = 'Se ha registrado correctamente';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -47,6 +50,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\OneToMany(targetEntity: Posts::class, mappedBy: 'user')]
     private $posts;
+
+    public function __construct()
+    {
+        $this->baneado = false;
+        $this->roles = ['ROLE_USER'];
+    }
 
     public function getId(): ?int
     {
