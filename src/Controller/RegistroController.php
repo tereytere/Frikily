@@ -13,7 +13,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistroController extends AbstractController
 {
-    #[Route('/registro', name: 'app_registro')]
+    #[Route('/registro', name: 'registro')]
 
     public function index(Request $request, ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordEncoder): Response
     {
@@ -26,7 +26,7 @@ class RegistroController extends AbstractController
             $em->persist($user);
             $em->flush();
             $this->addFlash('exito', User::REGISTRO_EXITOSO);
-            return $this->redirectToRoute('app_registro');
+            return $this->redirectToRoute('registro');
         }
         return $this->render('registro/index.html.twig', [
             'controller_name' => 'RegistroController',
